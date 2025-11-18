@@ -1,36 +1,73 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Putrawin Adha Muzakki - Portofolio')</title>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- Impor Google Fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    {{-- Impor CSS yang sudah di-compile oleh Vite --}}
+    @vite('resources/css/app.css')
+</head>
+<body class="bg-charcoal text-eggshell font-sans antialiased">
+    
+    {{-- Container Utama dengan Padding Samping --}}
+    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+        {{-- Komponen Navigasi --}}
+        <header id="navigation" class="py-8">
+            <nav class="flex justify-between items-center">
+                <a href="/">
+                    {{-- Kita gunakan font display (Pirata One) untuk logo/nama --}}
+                    <h1 class="font-display text-4xl tracking-wider">Putrawin Adha Muzakki</h1>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/showcase" class="font-medium hover:text-brand-pink transition-colors">Selected Work</a>
+                    <a href="/resume" class="font-medium hover:text-brand-pink transition-colors">Resume</a>
+                    <a href="#footer" 
+                        x-data="{}" 
+                        @click.prevent="document.querySelector('#footer').scrollIntoView({ behavior: 'smooth' })"
+                        class="font-medium border-2 border-eggshell rounded-sm px-4 py-2 hover:bg-eggshell hover:text-charcoal transition-colors">
+                        Get In Touch
+                    </a>
+                </div>
+                {{-- Tombol Menu untuk Mobile (fungsionalitas JS nanti) --}}
+                <div class="md:hidden">
+                    <button class="text-eggshell">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </header>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+        {{-- Main Content Area --}}
+        <main>
+            @yield('content')
+        </main>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
+        {{-- Komponen Footer --}}
+        <footer id="footer" class="py-20 mt-20 text-center">
+            <h2 class="font-display text-5xl md:text-6xl">Get in Touch</h2>
+            <p class="mt-4 max-w-2xl mx-auto">
+                Saat ini saya terbuka untuk kesempatan baru. Jangan ragu untuk menghubungi saya!
+            </p>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="#" class="text-eggshell hover:text-brand-pink">GitHub</a>
+                <a href="#" class="text-eggshell hover:text-brand-pink">LinkedIn</a>
+                <a href="#" class="text-eggshell hover:text-brand-pink">Email</a>
+            </div>
+            <div class="mt-16 text-sm text-gray-400">
+                &copy; {{ date('Y') }} Nama Kamu. Dibuat dengan Laravel & Tailwind CSS.
+            </div>
+        </footer>
+
+    </div>
+
+</body>
 </html>
