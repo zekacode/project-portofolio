@@ -22,6 +22,7 @@
                     <th class="py-3 px-4 text-left">Judul</th>
                     <th class="py-3 px-4 text-left">Slug</th>
                     <th class="py-3 px-4 text-left">Thumbnail</th>
+                    <th class="py-3 px-4 text-left">Tags</th>
                     <th class="py-3 px-4 text-left">Tanggal</th>
                     <th class="py-3 px-4 text-center">Aksi</th>
                 </tr>
@@ -37,6 +38,11 @@
                             @else
                                 <span class="text-gray-500 text-xs">No Image</span>
                             @endif
+                        </td>
+                        <td class="py-3 px-4">
+                            @foreach ($project->tags as $tag)
+                                <span class="inline-block bg-gray-600 text-gray-300 rounded-full px-3 py-1 text-xs font-semibold mr-2">{{ $tag->name }}</span>
+                            @endforeach
                         </td>
                         <td class="py-3 px-4">{{ $project->project_date }}</td>
                         <td class="py-3 px-4 text-center">

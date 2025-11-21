@@ -53,6 +53,21 @@
             @endif
         </div>
 
+        {{-- Tags --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-300">Tags</label>
+            <div class="mt-2 space-y-2">
+                @foreach ($tags as $tag)
+                    <div class="flex items-center">
+                        <input id="tag-{{ $tag->id }}" name="tags[]" type="checkbox" value="{{ $tag->id }}"
+                            @if(in_array($tag->id, $project->tags->pluck('id')->toArray())) checked @endif
+                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        <label for="tag-{{ $tag->id }}" class="ml-3 block text-sm font-medium text-gray-300">{{ $tag->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
         {{-- Tanggal Proyek --}}
         <div>
             <label for="project_date" class="block text-sm font-medium text-gray-300">Tanggal Proyek</label>

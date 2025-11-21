@@ -3,11 +3,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tag;
 
 class Project extends Model
 {
     use HasFactory;
-
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -32,4 +33,12 @@ class Project extends Model
         'links' => 'array', // Memberitahu Laravel bahwa kolom 'links' adalah array/JSON
         'project_date' => 'date', // Memberitahu Laravel bahwa kolom ini adalah objek tanggal
     ];
+
+    /**
+     * The tags that belong to the project.
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -26,8 +27,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        // Cukup tampilkan view-nya saja
-        return view('admin.projects.create');
+        $tags = Tag::orderBy('name')->get(); // Ambil semua tag, urutkan berdasarkan nama
+        return view('admin.projects.create', compact('tags'));
     }
 
     /**
@@ -45,6 +46,8 @@ class ProjectController extends Controller
             'content' => 'required|string',
             'links.github' => 'nullable|url', // Boleh kosong, tapi jika diisi harus URL valid
             'links.demo' => 'nullable|url',
+            'tags' => 'nullable|array', // Boleh kosong, tapi jika ada harus berupa array
+            'tags.*' => 'exists:tags,id', // Setiap item di dalam array tags harus ada di tabel tags
         ]);
 
         $thumbnailPath = null;
@@ -68,6 +71,11 @@ class ProjectController extends Controller
             ],
         ]);
 
+        // Jika ada tag yang dipilih, lampirkan ke proyek
+        if (!empty($validated['tags'])) {
+            $project->tags()->attach($validated['tags']);
+        }
+
         // 4. Redirect ke Halaman Index dengan Pesan Sukses
         return redirect()->route('admin.projects.index')->with('success', 'Proyek baru berhasil ditambahkan!');
     }
@@ -85,8 +93,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        // Laravel's Route Model Binding akan otomatis mencari Project berdasarkan ID dari URL
-        return view('admin.projects.edit', compact('project'));
+        $tags = Tag::orderBy('name')->get();
+        return view('admin.projects.edit', compact('project', 'tags'));
     }
 
     /**
@@ -105,6 +113,8 @@ class ProjectController extends Controller
             'content' => 'required|string',
             'links.github' => 'nullable|url',
             'links.demo' => 'nullable|url',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         $thumbnailPath = $project->thumbnail; // Ambil path lama sebagai default
@@ -131,6 +141,9 @@ class ProjectController extends Controller
                 'demo' => $validated['links']['demo'] ?? null,
             ],
         ]);
+
+        // Method sync() akan otomatis menambah/menghapus relasi sesuai array yang diberikan
+        $project->tags()->sync($validated['tags'] ?? []);
 
         // 4. Redirect ke Halaman Index dengan Pesan Sukses
         return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil diperbarui!');
