@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,11 +58,11 @@ Route::prefix('portal-admin-rahasia-123xyz')->name('admin.')->group(function () 
         
         // Dashboard Admin
         Route::get('/dashboard', function () {
-            // Untuk sementara, kita tampilkan teks. Nanti akan kita ganti dengan view.
-            return "<h1>Selamat Datang di Dashboard Admin</h1><form method='POST' action='" . route('admin.logout') . "'>" . csrf_field() . "<button type='submit'>Logout</button></form>"; 
+            // Arahkan dashboard langsung ke daftar proyek
+            return redirect()->route('admin.projects.index');
         })->name('dashboard');
 
-        // Rute CRUD untuk Proyek, Pengalaman, dll akan ditambahkan di sini nanti.
+        Route::resource('projects', ProjectController::class);
 
         // Rute otentikasi yang butuh login
         Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
