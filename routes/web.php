@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,7 @@ Route::prefix('portal-admin-rahasia-123xyz')->name('admin.')->group(function () 
         Route::resource('projects', ProjectController::class);
         Route::resource('tags', TagController::class);
         Route::resource('experiences', ExperienceController::class);
+        Route::resource('skills', SkillController::class);
 
         // Rute otentikasi yang butuh login
         Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
