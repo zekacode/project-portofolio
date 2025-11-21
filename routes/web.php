@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,7 @@ Route::prefix('portal-admin-rahasia-123xyz')->name('admin.')->group(function () 
         })->name('dashboard');
 
         Route::resource('projects', ProjectController::class);
+        Route::resource('tags', TagController::class);
 
         // Rute otentikasi yang butuh login
         Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
