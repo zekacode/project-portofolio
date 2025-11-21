@@ -12,11 +12,14 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\ProjectController as PublicProjectController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,21 +30,12 @@ use App\Http\Controllers\Admin\EducationController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/showcase', function () {
-    return view('showcase.index'); 
-})->name('showcase.index');
+Route::get('/showcase', [PublicProjectController::class, 'index'])->name('showcase.index');
+Route::get('/showcase/{project:slug}', [PublicProjectController::class, 'show'])->name('showcase.show');
 
-Route::get('/showcase/contoh-proyek-statis', function () {
-    return view('showcase.show');
-})->name('showcase.show.static'); // Beri nama unik untuk versi statis
-
-Route::get('/resume', function () {
-    return view('resume');
-})->name('resume.index');
+Route::get('/resume', [ResumeController::class, 'index'])->name('resume.index');
 
 
 /*
@@ -66,7 +60,7 @@ Route::prefix('portal-admin-rahasia-123xyz')->name('admin.')->group(function () 
             return redirect()->route('admin.projects.index');
         })->name('dashboard');
 
-        Route::resource('projects', ProjectController::class);
+        Route::resource('projects', AdminProjectController::class);
         Route::resource('tags', TagController::class);
         Route::resource('experiences', ExperienceController::class);
         Route::resource('skills', SkillController::class);
