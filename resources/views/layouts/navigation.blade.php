@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('admin.skills.index')" :active="request()->routeIs('admin.skills.*')">
                         {{ __('Skills') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.educations.index')" :active="request()->routeIs('admin.educations.*')">
+                        {{ __('Educations') }}
+                    </x-nav-link>
                 </div>
             </div>
 
