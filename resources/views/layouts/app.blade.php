@@ -1,9 +1,10 @@
+{{-- File: resources/views/layouts/app.blade.php --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Putrawin Adha Muzakki - Portofolio')</title>
+    <title>@yield('title', 'Nama Kamu - Web Developer')</title>
 
     {{-- Impor Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,31 +12,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     {{-- Impor CSS yang sudah di-compile oleh Vite --}}
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-charcoal text-eggshell font-sans antialiased">
     
     {{-- Container Utama dengan Padding Samping --}}
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 
-        {{-- Komponen Navigasi --}}
+        {{-- Komponen Navigasi Publik --}}
         <header id="navigation" class="py-8">
             <nav class="flex justify-between items-center">
-                <a href="/">
-                    {{-- Kita gunakan font display (Pirata One) untuk logo/nama --}}
-                    <h1 class="font-display text-4xl tracking-wider">Putrawin Adha Muzakki</h1>
+                <a href="{{ route('home') }}">
+                    <h1 class="font-display text-4xl tracking-wider">NAMA KAMU</h1>
                 </a>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="/showcase" class="font-medium hover:text-brand-pink transition-colors">Selected Work</a>
-                    <a href="/resume" class="font-medium hover:text-brand-pink transition-colors">Resume</a>
-                    <a href="#footer" 
-                        x-data="{}" 
-                        @click.prevent="document.querySelector('#footer').scrollIntoView({ behavior: 'smooth' })"
-                        class="font-medium border-2 border-eggshell rounded-sm px-4 py-2 hover:bg-eggshell hover:text-charcoal transition-colors">
-                        Get In Touch
-                    </a>
+                    {{-- Gunakan nama route yang sudah kita definisikan --}}
+                    <a href="{{ route('showcase.index') }}" class="font-medium hover:text-brand-pink transition-colors">Selected Work</a>
+                    <a href="{{ route('resume.index') }}" class="font-medium hover:text-brand-pink transition-colors">Resume</a>
+                    <a href="#footer" class="font-medium border-2 border-eggshell rounded-sm px-4 py-2 hover:bg-eggshell hover:text-charcoal transition-colors">Get In Touch</a>
                 </div>
-                {{-- Tombol Menu untuk Mobile (fungsionalitas JS nanti) --}}
                 <div class="md:hidden">
                     <button class="text-eggshell">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
