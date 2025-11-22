@@ -13,7 +13,7 @@
 
     {{-- Showcase Section Preview --}}
     <section class="py-16 mt-32">
-        <h2 class="font-display text-5xl md:text-6xl text-center mb-12">Selected Work</h2>
+        <h2 class="font-display text-5xl md:text-6xl text-center mb-12">Recent Work</h2>
         
         {{-- Grid Proyek --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -34,7 +34,7 @@
                 </a>
             @empty
                 <div class="md:col-span-2 lg:col-span-3 text-center py-10">
-                    <p class="text-gray-400">Belum ada proyek untuk ditampilkan.</p>
+                    <p class="text-gray-400">No projects to display yet.</p>
                 </div>
             @endforelse
 
@@ -44,7 +44,7 @@
         @if($latestProjects->isNotEmpty())
             <div class="text-center mt-12">
                 <a href="{{ route('showcase.index') }}" class="inline-block font-medium border-2 border-eggshell rounded-sm px-8 py-3 hover:bg-eggshell hover:text-charcoal transition-colors">
-                    Lihat Semua Proyek &gt;
+                    View All Projects &gt;
                 </a>
             </div>
         @endif
@@ -72,17 +72,15 @@
 
             {{-- Kolom Teks Bio --}}
             <div class="w-full md:w-2/3 text-center md:text-left">
-                <h2 class="font-display text-5xl md:text-6xl">Siapa Saya?</h2>
+                <h2 class="font-display text-5xl md:text-6xl">About Me</h2>
                 <p class="mt-6 text-lg leading-relaxed text-gray-300">
-                    Saya adalah seorang <span class="text-brand-pink font-medium">web programmer</span> dan <span class="text-brand-pink font-medium">problem solver</span> dari Indonesia. Saat ini terbuka untuk kesempatan kerja baru dan proyek freelance.
+                    I am a versatile technologist passionate about building complete digital ecosystems. My skillset revolves around five core pillars: <span class="text-brand-pink font-medium">AI Engineering, Game Development, Mobile & Web Programming, and UI/UX Design.</span>
                     <br><br>
-                    Dengan pengalaman dalam membangun aplikasi dari awal hingga akhir, saya menikmati setiap proses dalam siklus pengembangan perangkat lunak. Saya sangat tertarik pada teknologi backend, terutama dalam ekosistem <span class="font-semibold">Laravel</span>, dan selalu bersemangat untuk belajar hal-hal baru.
-                    <br><br>
-                    Ketika tidak sedang *ngoding*, saya suka membaca buku tentang teknologi atau bermain game. Mari terhubung!
+                    From building robust backends with Laravel to creating cross-platform apps with Flutter, I focus on delivering scalable solutions. My work in AI Engineering includes developing intelligent chatbots, while my passion for Game Development drives me to create immersive worlds in Unity. Crucially, I integrate UI/UX Design principles into every project to ensure seamless user interactions. Whether it's infrastructure—backed by my Network Administration background—or frontend aesthetics, I am dedicated to crafting high-quality software.
                 </p>
                 <div class="mt-8">
                     <a href="#footer" class="inline-block font-medium border-2 border-eggshell rounded-sm px-8 py-3 hover:bg-eggshell hover:text-charcoal transition-colors">
-                        Hubungi Saya &gt;
+                        Get in Touch &gt;
                     </a>
                 </div>
             </div>

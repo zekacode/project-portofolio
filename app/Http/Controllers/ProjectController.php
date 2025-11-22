@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\Tag;
 
 class ProjectController extends Controller
 {
@@ -12,12 +13,24 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        // Ambil semua proyek, urutkan dari yang terbaru
-        // 'with('tags')' adalah Eager Loading untuk mengambil relasi tags
-        // agar tidak terjadi N+1 query problem.
-        $projects = Project::with('tags')->latest('project_date')->get();
+        // 1. Ambil semua tag untuk ditampilkan sebagai tombol filter
+        // 'whereHas' memastikan hanya tag yang memiliki setidaknya satu proyek yang diambil
+        $tags = Tag::whereHas('projects')->orderBy('name')->get();
 
-        return view('showcase.index', compact('projects'));
+        // 2. Query Proyek dengan Filter
+        $projects = Project::with('tags')
+            ->latest('project_date')
+            // Jika ada parameter 'tag' di URL (misal: ?tag=laravel)
+            ->when(request('tag'), function ($query) {
+                $slug = request('tag');
+                // Filter proyek yang memiliki tag dengan slug tersebut
+                $query->whereHas('tags', function ($q) use ($slug) {
+                    $q->where('slug', $slug);
+                });
+            })
+            ->get();
+
+        return view('showcase.index', compact('projects', 'tags'));
     }
 
     /**

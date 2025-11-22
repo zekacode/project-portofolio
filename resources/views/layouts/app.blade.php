@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Nama Kamu - Web Developer')</title>
+    <title>@yield('title', 'Putrawin Adha Muzakki')</title>
 
     {{-- Impor Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,11 +23,10 @@
         <header id="navigation" class="py-8">
             <nav class="flex justify-between items-center">
                 <a href="{{ route('home') }}">
-                    <h1 class="font-display text-4xl tracking-wider">NAMA KAMU</h1>
+                    <h1 class="font-display text-4xl tracking-wider">Putrawin Adha Muzakki</h1>
                 </a>
                 <div class="hidden md:flex items-center space-x-8">
-                    {{-- Gunakan nama route yang sudah kita definisikan --}}
-                    <a href="{{ route('showcase.index') }}" class="font-medium hover:text-brand-pink transition-colors">Selected Work</a>
+                    <a href="{{ route('showcase.index') }}" class="font-medium hover:text-brand-pink transition-colors">Showcase</a>
                     <a href="{{ route('resume.index') }}" class="font-medium hover:text-brand-pink transition-colors">Resume</a>
                     <a href="#footer" class="font-medium border-2 border-eggshell rounded-sm px-4 py-2 hover:bg-eggshell hover:text-charcoal transition-colors">Get In Touch</a>
                 </div>
@@ -50,15 +49,15 @@
         <footer id="footer" class="py-20 mt-20 text-center">
             <h2 class="font-display text-5xl md:text-6xl">Get in Touch</h2>
             <p class="mt-4 max-w-2xl mx-auto">
-                Saat ini saya terbuka untuk kesempatan baru. Jangan ragu untuk menghubungi saya!
+                Open to new projects and collaborations. Don't be shy, say hi!
             </p>
             <div class="mt-8 flex justify-center space-x-6">
-                <a href="#" class="text-eggshell hover:text-brand-pink">GitHub</a>
-                <a href="#" class="text-eggshell hover:text-brand-pink">LinkedIn</a>
-                <a href="#" class="text-eggshell hover:text-brand-pink">Email</a>
+                <a href="https://github.com/zekacode" class="text-eggshell hover:text-brand-pink">GitHub</a>
+                <a href="https://www.linkedin.com/in/putrawin-adha-muzakki/" class="text-eggshell hover:text-brand-pink">LinkedIn</a>
+                <a href="mailto:putrawinmuzakki@gmail.com" class="text-eggshell hover:text-brand-pink">Email</a>
             </div>
             <div class="mt-16 text-sm text-gray-400">
-                &copy; {{ date('Y') }} Nama Kamu. Dibuat dengan Laravel & Tailwind CSS.
+                &copy; {{ date('Y') }} Putrawin Adha Muzakki. Built with Laravel & Tailwind CSS.
             </div>
         </footer>
 

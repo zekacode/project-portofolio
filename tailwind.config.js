@@ -22,7 +22,7 @@ export default {
                 'navy': '#234d7c',
                 'brand-red': '#ed4723',
                 'brand-blue': '#368ef3',
-                'brand-pink': '#fbc3cd',
+                'brand-pink': '#E43636',
             }
         },
     },

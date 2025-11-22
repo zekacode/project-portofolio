@@ -1,21 +1,36 @@
 @extends('layouts.app')
 
-@section('title', 'Selected Work - Nama Kamu')
+@section('title', 'Project Showcase - Putrawin Adha Muzakki')
 
 @section('content')
 <section class="py-16 md:py-24">
     <div class="text-center">
-        <h1 class="font-display text-7xl md:text-8xl">Selected Work</h1>
+        <h1 class="font-display text-7xl md:text-8xl">Project Showcase</h1>
         <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-300">
-            Berikut adalah beberapa proyek yang pernah saya kerjakan, mencakup pengembangan web dan sedikit desain.
+            A collection of my recent work and experiments.
         </p>
     </div>
 
-    {{-- Filter Buttons (Statis, belum fungsional) --}}
-    <div class="flex justify-center items-center gap-4 my-12">
-        <button class="bg-eggshell text-charcoal rounded-full px-5 py-2 text-sm font-semibold">Semua</button>
-        <button class="border border-gray-600 text-gray-300 rounded-full px-5 py-2 text-sm font-semibold hover:bg-gray-700 transition-colors">Kode</button>
-        <button class="border border-gray-600 text-gray-300 rounded-full px-5 py-2 text-sm font-semibold hover:bg-gray-700 transition-colors">Desain</button>
+    {{-- Filter Buttons (DINAMIS) --}}
+    <div class="flex flex-wrap justify-center items-center gap-4 my-12">
+        
+        {{-- Tombol "Semua" --}}
+        {{-- Jika tidak ada request 'tag', maka tombol ini aktif --}}
+        <a href="{{ route('showcase.index') }}" 
+        class="px-5 py-2 text-sm font-semibold rounded-full transition-colors
+        {{ !request('tag') ? 'bg-eggshell text-charcoal' : 'border border-gray-600 text-gray-300 hover:bg-gray-700' }}">
+        Semua
+        </a>
+
+        {{-- Loop Tombol Tag --}}
+        @foreach ($tags as $tag)
+            <a href="{{ route('showcase.index', ['tag' => $tag->slug]) }}" 
+            class="px-5 py-2 text-sm font-semibold rounded-full transition-colors
+            {{ request('tag') == $tag->slug ? 'bg-eggshell text-charcoal' : 'border border-gray-600 text-gray-300 hover:bg-gray-700' }}">
+            {{ $tag->name }}
+            </a>
+        @endforeach
+
     </div>
 
     {{-- Grid Proyek --}}
@@ -46,7 +61,7 @@
             </a>
         @empty
             <div class="md:col-span-2 lg:col-span-3 text-center py-16">
-                <p class="text-gray-400 text-lg">Belum ada proyek yang ditambahkan.</p>
+                <p class="text-gray-400 text-lg">More projects coming soon.</p>
             </div>
         @endforelse
     </div>
